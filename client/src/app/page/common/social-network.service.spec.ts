@@ -29,14 +29,14 @@ describe('SocialNetworkService', () => {
   it('should be created', () => {
     const service: SocialNetworkService = TestBed.get(SocialNetworkService);
     expect(service)
-      .toBeTruthy();
+      .toBeTruthy()
   });
 
   it('should return items list', fakeAsync(inject([SocialNetworkService], (service: SocialNetworkService) => {
     service.getLinksList()
       .subscribe(list => {
       expect(list)
-      .toEqual(mockList);
+      .toEqual(mockList)
     });
   }))
   );

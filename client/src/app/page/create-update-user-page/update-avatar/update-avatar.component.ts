@@ -26,6 +26,7 @@ export class UpdateAvatarComponent implements OnInit {
     this.userService.postImage(inputEl.files[0])
       .subscribe((data: { url: string }) => {
         this.onUpload.emit(data.url);
+        this.userService.getUser()
       })
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, HostListener, EventEmitter } from '@angular/core';
-import { NavItemsService } from '../../common/nav-items.service';
-import { NavItem } from '../../common/nav-item';
+import { NavItem, NavItemSet } from '../../common/nav-item';
 
 @Component({
   selector: 'app-burger-menu',
@@ -13,8 +12,7 @@ export class BurgerMenuComponent implements OnInit {
   @Input() public active: boolean;
   @Input() public menuList: NavItem[];
   @Output() readonly focusOut: EventEmitter<boolean> = new EventEmitter();
-
-  constructor(private readonly navItemsService: NavItemsService) { }
+  itemMenuSettings: NavItemSet;
 
   @HostListener('mouseleave') mouseleave(): void {
     setTimeout(() => {
@@ -26,6 +24,10 @@ export class BurgerMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.itemMenuSettings = {
+      type: 'burgerMenu',
+      style: 'burger-menu-elem'
+    };
   }
 
   closeBurgerMenu(): boolean {
@@ -34,8 +36,8 @@ export class BurgerMenuComponent implements OnInit {
     return false;
   }
 
-  trackById(link: NavItem): string {
-    return link.id;
+  trackById(link: number, item: NavItem): string {
+    return item.id + (item.current).toString();
   }
 
 }

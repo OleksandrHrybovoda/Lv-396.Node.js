@@ -1,8 +1,8 @@
-@import '../common/css/theme';
+@import "../common/css/theme";
 
 .main-wrapper {
   min-height: 100vh;
-  padding: 0 0 20px 0;
+  padding: 90px 0 20px 0;
   font-family: $font-stack;
   font-size: $base-font-size;
   line-height: $base-line-height;
@@ -42,26 +42,61 @@
   grid-template-columns: repeat(5, 1fr);
 }
 
-.sidebar-wrapper{
-  @media (max-width: 991px){
+.sidebar-wrapper {
+  @media (max-width: 991px) {
     margin-bottom: 40px;
   }
 }
 
 .filter-wrapper.filter-col-2 {
-  @media (max-width: 760px){
+  @media (max-width: 760px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: $grid-gutter-width;
 
-    @media (max-width: 539px){
+    @media (max-width: 539px) {
       display: block;
     }
   }
 }
 
 .container-fluid.header-navbar {
-  position: relative;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
   padding: 0;
+  z-index: 1000;
+}
+
+.container-fluid.header-navbar.show {
+  animation-name: show-animation;
+  animation-duration: 0.2s;
+}
+.container-fluid.header-navbar.hide {
+  top: -70px;
+  animation-name: hide-animation;
+  animation-duration: 0.2s;
+}
+
+@keyframes show-animation {
+  from {
+    top: -70px;
+  }
+  50% {
+    top: -33px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes hide-animation {
+  from {
+    top: 0px;
+  }
+  50% {
+    top: -33px;
+  }
+  to {
+    top: -70px;
+  }
 }

@@ -15,4 +15,10 @@ export class NavItemsService {
 
     return of(NAVBAR_LIST);
   }
+  checkLink(link: NavItem, userType: string, menu: string): boolean {
+    const type = userType === 'hr' ? link.hr : link.dev;
+    const side = menu === 'burgerMenu' ? link.burgerMenu : link.rightMenu;
+
+    return (side && userType === type);
+  }
 }

@@ -75,11 +75,9 @@ const UserSchema = new Schema({
   dates: [{
     topic: {
       type: String,
-      required: true,
     },
     date: {
       type: Date,
-      required: true,
     },
   },
   ],

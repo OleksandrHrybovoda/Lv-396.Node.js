@@ -4,6 +4,8 @@ import { User } from '../../common/models/user';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CreateUpdateUserService } from '../common/create-update-user.service';
+import { DatesItem } from '../common/dates-item';
 
 @Component({
   selector: 'app-create-update-user-page',
@@ -15,26 +17,29 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
 
   user: User = new User();
   finalContacts: [];
+  finalDates: DatesItem[];
   finalMContacts: [];
   ifChosenDevelopmentDepartment: boolean;
   ifChosenHrDepartment: boolean;
   notValidUser: boolean;
   create: boolean;
   requiredForCreationUserFields: any[];
+  emptyDates: boolean;
 
   constructor(private readonly userService: UserService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
-              private readonly toastr: ToastrService) {
+              private readonly toastr: ToastrService,
+              private readonly createUpdateUserService: CreateUpdateUserService){
   }
 
   ngOnInit(): void {
-    this.userService.chosenDatesForUser.subscribe((date) => {
-      this.user.dates = date;
-    });
+    this.subscribeForUpdates();
     this.notValidUser = false;
     this.finalContacts = [];
+    this.finalDates = [];
     this.finalMContacts = [];
+    this.emptyDates = false;
 
     this.route.paramMap.subscribe(parameterMap => {
       const id = parameterMap.get('id');
@@ -43,9 +48,18 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.deleteNotValidValuesFromUserObjectOnDepartmentChoose();
   }
 
+  private subscribeForUpdates(): void {
+    this.createUpdateUserService.userDataUpdator
+      .takeUntil(this.destroy$)
+      .subscribe((date) => {
+      this[date.name] = date.value;
+    });
+  }
+
   private getEmployee(id: string): void {
     if (id && !this.userService.user) {
       this.userService.getUser(id, true)
+        .takeUntil(this.destroy$)
         .subscribe(user => this.user = user);
     } else if (id && this.userService.user) {
       this.user = this.userService.user;
@@ -65,12 +79,18 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
     this.user.email =  this.finalMContacts['email'];
   }
 
+  checkOnEmptyDates(): void {
+    this.finalDates.map(item => {
+      this.emptyDates = !item.topic || !item.date ? true : false;
+    });
+  }
+
   extractUser(user, chosenDevelopmentDepartment, chosenHrDepartment): any {
     this.user = user;
     this.ifChosenDevelopmentDepartment = chosenDevelopmentDepartment;
     this.ifChosenHrDepartment = chosenHrDepartment;
-
     this.user.contacts =  this.finalContacts;
+    this.user.dates =  this.finalDates;
 
     if (this.validateUser()) {
       if (this.user._id) {
@@ -98,7 +118,7 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
       }
     } else {
       this.notValidUser = true;
-      this.toastr.error('Please, fill in all requiredfields', 'Result', {
+      this.toastr.error('Please, fill in all required fields', 'Result', {
         positionClass: 'toast-top-full-width',
         closeButton: true
       });
@@ -108,13 +128,14 @@ export class CreateUpdateUserPageComponent implements OnInit, OnDestroy {
   validateUser(): boolean {
     this.user.type = this.ifChosenHrDepartment ? 'hr' : 'developer';
     this.requiredForCreationUserFields = [this.user.firstName, this.user.lastName, this.user.department,
-      this.user.position, this.user.hr, this.user.manager];
+                                          this.user.position, this.user.hr, this.user.manager];
     if (this.ifChosenDevelopmentDepartment) {
       this.requiredForCreationUserFields = [...this.requiredForCreationUserFields, this.user.teamlead];
     }
     let requiredField = true;
     this.requiredForCreationUserFields.map(elem => {
-      if (!elem) {
+      this.checkOnEmptyDates();
+      if (!elem ||  this.emptyDates) {
         requiredField = false;
       }
     });

@@ -1,5 +1,5 @@
-@import '../../../../common/css/theme';
-@import '../../../../common/css/theme.form';
+@import '../../../../../common/css/theme';
+@import '../../../../../common/css/theme.form';
 
 ::ng-deep .bs-datepicker {
   box-shadow: none;
@@ -63,7 +63,7 @@
 ::ng-deep .bs-datepicker-head button.next,
 ::ng-deep .bs-datepicker-head button.previous {
   padding: 7px 10px;
-  background-image: url('../../../../../assets/img/arrow_left.svg');
+  background-image: url('../../../../../../assets/img/arrow_left.svg');
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -74,7 +74,7 @@
 
 ::ng-deep .bs-datepicker-head button.next {
   margin-left: auto;
-  background-image: url('../../../../../assets/img/arrow_right.svg');
+  background-image: url('../../../../../../assets/img/arrow_right.svg');
 }
 
 ::ng-deep .bs-datepicker-head button.next span,

@@ -7,7 +7,7 @@
     <li class="user-bar__row user-bar__elem  dropdown-item" *ngFor="let dates of dateList; trackBy: trackById"
       role="menuitem" [routerLink]="[ '/profile/upcoming-dates' ]" (click)="currentByRout('/profile/upcoming-dates')">
       <div class="dates-topic">
-        <div *ngIf ="typeOfUser"> {{ dates.firstName }} {{ dates.lastName }}'s </div>
+        <div *ngIf="typeOfUser"> {{ dates.firstName }} {{ dates.lastName }}'s </div>
         <span> {{ dates.topic }}</span>
       </div>
     </li>
@@ -18,10 +18,13 @@
     <img src="assets/img/navbar-notifications-desk.png" alt="new tasks" class="notifications__icon">
     <span class="notifications__count">({{ newTasksCount }})</span>
   </div>
-  <ul class="user-bar__menu user-bar__newTasks dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
+  <ul class="user-bar__menu user-bar__newTasks dropdown-menu" *dropdownMenu role="menu"
+    aria-labelledby="button-disabled-item">
     <li class="user-bar__row user-bar__elem dropdown-item" *ngFor="let newTask of newTasks; trackBy: trackById"
-      role="menuitem" (click)="openTaskByid(newTask.id)" [routerLink]="[ '/profile/upcoming-tasks' ]">
-      <a href><b>{{ newTask.name }}</b> <br>{{ newTask.author.firstName }} {{ newTask.author.lastName }}</a> {{ newTask.date | date:"dd/MM/yyyy"}}
+      role="menuitem" (click)="openTaskByid(newTask.id)">
+      <b>{{ newTask.name }}</b><br>
+      <a>{{ newTask.date | date:"dd/MM/yyyy" }}
+        {{ newTask.author.firstName }} {{ newTask.author.lastName }}</a>
     </li>
   </ul>
 </div>
@@ -32,16 +35,12 @@
 </div>
 <div class="user-bar__item btn-group" dropdown>
   <div class="user-bar__btn" dropdownToggle>
-    <img class="user-bar__avatar" [src]="user.photoURL" alt="avatar">
+    <img class="user-bar__avatar" [src]="avatar" alt="avatar">
   </div>
-  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu"
-    aria-labelledby="button-disabled-item">
+  <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
     <ng-container *ngFor="let link of menuList; let i = index; trackBy: trackById;">
-      <li class="user-bar__row" role="menuitem"
-        *ngIf="link.rightMenu && (userType === link.dev || userType === link.hr)" [ngClass]="{'current': link.current}"
-        (click)="currentByIndex(i)">
-        <a href [routerLink]="[ link.router ]" class="user-bar__elem dropdown-item">{{ link.title }}</a>
-      </li>
+      <app-menu-item [settings]="itemMenuSettings" [link]="link" (clickOnMenuItem)="currentByIndex(i)">
+      </app-menu-item>
     </ng-container>
   </ul>
 </div>

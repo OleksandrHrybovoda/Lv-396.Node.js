@@ -5,6 +5,7 @@ import { User, Department, Manager } from '../models/user';
 import { api } from '../../../environments/environment';
 
 import { UserService } from './user.service';
+import {expect} from "@angular/platform-browser/testing/src/matchers";
 
 describe('UserService', () => {
   let injector: TestBed;
@@ -104,9 +105,18 @@ describe('UserService', () => {
         expect(users).toEqual(dummyUsers);
       });
 
+      service.getUsersOfHr().subscribe(users => {
+        expect(users.length).toBe(1);
+        expect(users).toEqual(dummyUsers);
+      });
+
       const req = httpMock.expectOne(`${api}users`);
       expect(req.request.method).toBe('GET');
       req.flush(dummyUsers);
+
+      const reqUsersOfHr = httpMock.expectOne(`${api}users?hr=${userId}`);
+      expect(reqUsersOfHr.request.method).toBe('GET');
+      reqUsersOfHr.flush(dummyUsers);
     });
   });
 });

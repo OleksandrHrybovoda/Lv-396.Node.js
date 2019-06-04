@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { throwError } from 'rxjs';
 
 import { BurgerMenuComponent } from './burger-menu.component';
 
@@ -8,9 +9,10 @@ describe('BurgerMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BurgerMenuComponent ]
+      declarations: [BurgerMenuComponent]
     })
-    .compileComponents();
+      .compileComponents()
+      .catch(err => throwError(new Error(err)));
   }));
 
   beforeEach(() => {
@@ -20,6 +22,8 @@ describe('BurgerMenuComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component)
+      .toBeTruthy()
+      .catch(err => throwError(new Error(err)));
   });
 });

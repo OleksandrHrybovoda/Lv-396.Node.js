@@ -14,10 +14,10 @@
           </a>
         </div>
       </div>
-      <app-burger-menu [active]="active" [menuList]="menuList" [userType]="userType" (focusOut)="closeBurgerMenu($event)"></app-burger-menu>
+      <app-burger-menu [userType]="userType" [menuList]="menuList" [active]="active" (focusOut)="closeBurgerMenu($event)"></app-burger-menu>
     </div>
     <div class="col-7 col-lg-7 d-flex pl-0 h-100">
-      <app-navbar-profile [userType]="userType" class="flex-grow-1 h-100" (click)="closeBurgerMenu(false)"></app-navbar-profile>
+      <app-navbar-profile [userType]="userType" [menuList]="menuList" class="flex-grow-1 h-100" (click)="closeBurgerMenu(false)"></app-navbar-profile>
     </div>
   </nav>
 </div>

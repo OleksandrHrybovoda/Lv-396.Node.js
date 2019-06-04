@@ -1,4 +1,3 @@
-<li class="burger-menu__item" *ngIf="link.burgerMenu && (userType === link.hr || userType === link.dev)"
-  [ngClass]="{'current': link.current}">
-  <a href [routerLink]="[ link.router ]">{{ link.title }}</a>
+<li *ngIf="checkedLink" class="{{ class }}" [ngClass]="{'active': link.current}">
+  <a href [routerLink]="[ link.router ]" (click)="clickOnItem()">{{ link.title }}</a>
 </li>

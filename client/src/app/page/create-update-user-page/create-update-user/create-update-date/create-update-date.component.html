@@ -2,21 +2,33 @@
   <form [formGroup]="addDatesForm" novalidate>
     <div class="date-form">
       <div class="row add-date" formArrayName="datesCount"
-           *ngFor="let date of addDatesForm.controls; let i = index">
+           *ngFor="let date of addDatesForm.controls.datesCount.controls; let i = index">
         <div *ngIf="(checkFirstElement(i))">
           <div class="input-label"><label>Upcoming review date</label></div>
         </div>
         <div *ngIf="(!checkFirstElement(i))" class="date-topic">
           <div class="col-md-10 date-topic" [formGroupName]="i">
-            <input class="form-control" type="text" placeholder="Date topic" formControlName="topic"
-                   aria-label="Add Date" required minlength="3" maxlength="20">
+            <input
+              class="form-control"
+              type="text" placeholder="Date topic"
+              aria-label="Add Date"
+              formControlName="topic"
+              minlength="3"
+              maxlength="20"
+              required
+              (change)="updateTopic($event, i)"
+              [ngClass]="leftBorderStylesForDate('topic', i)"
+            >
           </div>
           <div class="col-md-2 dlete-icon">
             <img _ngcontent-c4="" alt="delete" class="delete__icon" src="assets/img/delete.svg" (click)="removeDate(i)">
           </div>
         </div>
-        <app-datepicker (onDateChange) = 'addDatesForm.controls.datesCount.value[i].date = $event'
-                 class="col-md-10"></app-datepicker>
+        <app-datepicker
+          (onDateChange) = 'updateDatePicker($event, i)'
+          class="col-md-10 datepicker"
+          [ngClass]="leftBorderStylesForDate('date', i)"
+        ></app-datepicker>
       </div>
       <button type="submit" class="col-md-12 light-button" (click)="addDate()">
         <img _ngcontent-c4="" alt="add" class="add__icon" src="assets/img/add.svg">

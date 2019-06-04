@@ -1,6 +1,19 @@
-@import '../../../common/css/theme';
-@import '../../../common/css/theme.form';
+@import '../../../../common/css/theme';
+@import '../../../../common/css/theme.form';
 
+.datepicker {
+  padding-left: 0;
+  margin-left: 10px;
+}
+.border-red {
+  border-left: 5px solid #ff000069;
+}
+.border-green {
+  border-left: 5px solid #28a74575;
+}
+.border-blue {
+  border-left: 5px solid $primary-color;
+}
 .additional-info {
   .form-info{
     width: 100%;
@@ -14,6 +27,7 @@
   }
   .date-form {
     width:100%;
+    padding-left: 10px;
     .second-button{
       margin-left: 45px;
     }
@@ -24,15 +38,12 @@
       text-transform: uppercase;
       font-weight: bold;
     }
-    .info-form {
-      padding: 10px 0 10px 0;
 
-      .form-control {
-        height: 50px;
-        width: 100%;
-
-      }
+    .form-control {
+      height: 50px;
+      width: 100%;
     }
+
     .input-label{
       margin-left: 10px;
     }

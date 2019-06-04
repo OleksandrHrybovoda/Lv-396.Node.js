@@ -13,6 +13,10 @@ a {
   text-decoration: none;
 }
 
+.hidden {
+  display: none;
+}
+
 :host {
   display: flex;
   justify-content: flex-end;
@@ -113,7 +117,9 @@ a {
       }
     }
     &__newTasks {
-      width: auto;
+      width: 220px;
+      max-height: 462px;
+      overflow-y: scroll;
       @include media-breakpoint-up(md) {
         right: auto !important;
         left: auto !important;
@@ -127,7 +133,13 @@ a {
       color: $primary-color;
       padding: 17px;
       text-transform: capitalize;
+      overflow: hidden;
+      text-overflow: ellipsis;
       cursor: pointer;
+      &:hover,
+      &.active {
+        background-color: $bg-color;
+      }
       @include media-breakpoint-up(md) {
         font: $base-font-size $font-stack;
       }
@@ -135,22 +147,22 @@ a {
   }
 }
 
-.dropdown-menu li a {
-  position: relative;
+ul::-webkit-scrollbar {
+  width: 8px;
+}
+ul::-webkit-scrollbar-track {
+  background-color: $bg-color;
+}
+ul::-webkit-scrollbar-thumb {
+  height: 10px;
+  border-radius: 1px;
+  background-color: rgba(132, 198, 252, 0.466);
+  transition: 0.6s ease-in-out;
+}
+ul::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(38, 152, 251, 0.685);
 }
 
-.dropdown-menu li a:hover,
-li:hover {
-  background: $bg-color !important;
-}
-.dropdown-menu li.current a::after {
-  position: absolute;
-  content: url("../../../../assets/img/symbol_ok.svg");
-  left: 140px;
-  @include media-breakpoint-up(md) {
-    left: 120px;
-  }
-}
 .dates-topic {
   display: flex;
   justify-content: flex-start !important;
@@ -158,6 +170,5 @@ li:hover {
 }
 
 .dates-topic span {
-   margin-left: 5px;
- }
-
+  margin-left: 5px;
+}

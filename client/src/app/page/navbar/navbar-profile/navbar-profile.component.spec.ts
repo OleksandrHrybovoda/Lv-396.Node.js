@@ -3,9 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { HttpClientModule } from '@angular/common/http';
 import { switchMap, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 
-import 'rxjs/add/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarProfileComponent } from './navbar-profile.component';
 import { NavItemsService } from '../../common/nav-items.service';
@@ -106,7 +105,8 @@ describe('NavbarProfileComponent', () => {
         NavItemsService
       ]
     })
-      .compileComponents();
+      .compileComponents()
+      .catch(err => throwError(new Error(err)));
   });
 
   beforeEach(() => {
@@ -121,14 +121,16 @@ describe('NavbarProfileComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy();
+      .toBeTruthy()
+      .catch(err => throwError(new Error(err)));
   });
 
   it(`should be inject service, shouldn't get navites list if note async`, () => {
     jasmine.createSpy('getNavList').and
       .returnValue(Observable.of(mockMenuList));
     expect(component.menuList)
-      .toEqual(mockMenuList);
+      .toEqual(mockMenuList)
+      .catch(err => throwError(new Error(err)));
     fixture.detectChanges();
   });
 

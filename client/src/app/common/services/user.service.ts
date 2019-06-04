@@ -21,7 +21,6 @@ export const httpOptions = {
 export class UserService {
 
   chosenDepartment = new EventEmitter();
-  chosenDatesForUser = new EventEmitter();
 
   constructor(private readonly http: HttpClient) {
   }

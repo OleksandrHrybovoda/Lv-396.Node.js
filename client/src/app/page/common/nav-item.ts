@@ -9,3 +9,8 @@ export class NavItem {
   dev: string;
   logout?: boolean;
 }
+
+export class NavItemSet {
+  type: string;
+  style: string;
+}

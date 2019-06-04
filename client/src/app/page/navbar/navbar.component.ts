@@ -12,12 +12,13 @@ import { NavItem } from '../common/nav-item';
 
 export class NavbarComponent implements OnInit {
 
+  active: boolean;
   name: string;
   surname: string;
   avatar: string;
-  active: boolean;
-  menuList: NavItem[];
   userType: string;
+  menuList: NavItem[];
+
 
   constructor(private readonly navItemsService: NavItemsService,
               private readonly userService: UserService,
@@ -28,7 +29,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(list => this.menuList = list);
     this.userType = this.userService.getUserType();
     this.navItemsService.currentRouter(this.router.url);
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe(e => {
       this.navItemsService.currentRouter(this.router.url);
     });
   }

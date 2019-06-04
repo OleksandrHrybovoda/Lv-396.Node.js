@@ -33,7 +33,7 @@ import { UpcomingDatesComponent } from './upcoming-dates/upcoming-dates.componen
 import { ListDatesComponent } from './upcoming-dates/list-dates/list-dates.component';
 import { ItemDateComponent } from './upcoming-dates/list-dates/item-date/item-date.component';
 import { AddTaskFormComponent } from './add-task-form/add-task-form.component';
-import { DatepickerComponent } from './create-update-user-page/create-update-date/datepicker/datepicker.component';
+import { DatepickerComponent } from './create-update-user-page/create-update-user/create-update-date/datepicker/datepicker.component';
 
 
 import { appConfigProviders } from './common/config';
@@ -43,7 +43,7 @@ import { CreateUpdateUserComponent } from './create-update-user-page/create-upda
 import { CommentModalComponent } from './comment-modal/comment-modal.component';
 import { AdditionalContactsComponent } from './create-update-user-page/additional-contacts/additional-contacts.component';
 import { ContactTypesComponent } from './create-update-user-page/additional-contacts/contact-types/contact-types.component';
-import { CreateUpdateDateComponent } from './create-update-user-page/create-update-date/create-update-date.component';
+import { CreateUpdateDateComponent } from './create-update-user-page/create-update-user/create-update-date/create-update-date.component';
 import { UpdateAvatarComponent } from './create-update-user-page/update-avatar/update-avatar.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 

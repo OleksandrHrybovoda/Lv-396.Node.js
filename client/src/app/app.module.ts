@@ -30,6 +30,7 @@ import { ForgotPasswordComponent } from './home/common/forgot-password/forgot-pa
 import { ResetPasswordComponent } from './home/common/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ScrollingDirective } from './page/navbar/scrolling.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ToastrModule } from 'ngx-toastr';
     MenuItemComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    ScrollingDirective
   ],
 
   imports: [
