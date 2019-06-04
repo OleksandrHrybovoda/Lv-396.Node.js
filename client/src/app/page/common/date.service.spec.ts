@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { expect } from '@angular/core/testing/src/testing_internal';
 import { DateService } from './date.service';
-import { describe } from 'selenium-webdriver/testing';
 
 describe('DateService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

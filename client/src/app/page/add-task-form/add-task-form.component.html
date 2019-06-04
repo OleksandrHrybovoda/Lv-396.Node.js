@@ -1,13 +1,13 @@
 <div class="row form-wrapper">
   <div class="container-fluid">
-    <div class="row" *ngIf="hideHeader === false">
+    <div class="row" *ngIf="!hideHeader">
       <h2 class="entry-title">Create issue</h2>
     </div>
-    <div class="row" *ngIf="isSuccessfullyDeleted === true">
+    <div class="row" *ngIf="isSuccessfullyDeleted">
       <p>(your message was successfully deleted)</p>
     </div>
   </div>
-  <div class="container-fluid" *ngIf="haveServerError === true">
+  <div class="container-fluid" *ngIf="haveServerError">
     <div class="row">
       <div class="alert alert-danger">
         <h5>Sorry, we have some problems</h5>
@@ -16,20 +16,20 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid" *ngIf="taskIsJustSend === true">
+  <div class="container-fluid" *ngIf="taskIsJustSend">
     <div class="row">
       <span class="pos-absolute">Your issue is already send. <a href="#" on-click="onDelete($event)">Undo?</a></span>
     </div>
   </div>
-  <form class="container-fluid" [ngClass]="{'hide-form': taskIsJustSend === true}" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+  <form class="container-fluid" [ngClass]="{'hide-form': taskIsJustSend}" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
     <div class="row form-row">
       <div class="col">
         <label for="taskName">Theme name</label>
         <input type="text" name="taskName" formControlName="taskName" id="taskName" required minlength="5" maxlength="20" placeholder="Theme name" value=""/>
-        <div *ngIf="isFieldRequired('taskName') === true" class="alert alert-danger visible-temporarily">
+        <div *ngIf="isFieldRequired('taskName')" class="alert alert-danger visible-temporarily">
           Field is required
         </div>
-        <div *ngIf="isFieldCorrectLength('taskName') === true" class="alert alert-danger visible-temporarily">
+        <div *ngIf="isFieldCorrectLength('taskName')" class="alert alert-danger visible-temporarily">
           The item text length have to be 5 symbols at least.
         </div>
       </div>
@@ -40,7 +40,7 @@
                              (filterVal)="getFilterVal(filter.id, $event)"></app-dropdown-filter>
       </div>
     </div>
-    <div class="row form-row" *ngIf="isUserHR === true && userDropDown !== undefined">
+    <div class="row form-row" *ngIf="isUserHR && userDropDown !== undefined">
       <label>Assign To</label>
       <app-dropdown-filter class="filter-item-container width-100"
                            [cssClassName]="dropDownCssClassName" [filterItem]="userDropDown"
@@ -48,10 +48,10 @@
     </div>
     <div class="row form-row">
       <input type="text" name="taskSummary" formControlName="taskSummary" id="taskSummary" required minlength="9" maxlength="40" placeholder="Summary message" value="" />
-      <div *ngIf="isFieldRequired('taskSummary') === true" class="alert alert-danger visible-temporarily">
+      <div *ngIf="isFieldRequired('taskSummary')" class="alert alert-danger visible-temporarily">
         Field is required
       </div>
-      <div *ngIf="isFieldCorrectLength('taskSummary') === true" class="alert alert-danger visible-temporarily">
+      <div *ngIf="isFieldCorrectLength('taskSummary')" class="alert alert-danger visible-temporarily">
         The item text length have to be 9 symbols at least.
       </div>
     </div>

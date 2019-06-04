@@ -7,24 +7,28 @@ import { ItemComponent } from './item.component';
 import { ModalComponent } from '../../../modal/modal.component';
 import { AccordionComponent } from '../accordion.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Task } from '../../../common/task';
+
+import { CommentModalComponent } from '../../../comment-modal/comment-modal.component';
+import { AddTaskFormComponent } from '../../../add-task-form/add-task-form.component';
+import { DropdownFilterComponent } from '../../../filter/dropdown-filter/dropdown-filter.component';
+import { ToastrModule } from 'ngx-toastr';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TasksService } from '../../../common/tasks.service';
+import { UserService } from '../../../../common/services/user.service';
 
 describe('ItemComponent', () => {
   let component: ItemComponent;
   let fixture: ComponentFixture<ItemComponent>;
-  let item: Task;
-  item = {
-    id: '0',
-    name: 'Upcoming task name',
-    excerpt: 'This content is straight in the template.',
-    status: { name: 'LOW', value: 2 },
-    type: { name: 'issue', value: 1 },
-    date: '22/03/2019',
-    author: {_id: '0', firstName: 'Alex', lastName: 'Somename'},
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-      'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-      'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis',
+
+  const tasksServiceMock = {
+    getUserTasks: () => {}
   };
+
+  const userServiceMock = {
+    getUser: () => {}
+  };
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -32,13 +36,23 @@ describe('ItemComponent', () => {
         AccordionModule.forRoot(),
         ModalModule.forRoot(),
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ToastrModule.forRoot(),
         ],
       declarations: [
         ModalComponent,
         AccordionComponent,
-        ItemComponent
-        ]
+        ItemComponent,
+        AddTaskFormComponent,
+        DropdownFilterComponent,
+        CommentModalComponent
+        ],
+      providers: [ {provide: TasksService, useValue: tasksServiceMock},
+                   {provide: UserService, useValue: userServiceMock},
+                   RouterTestingModule,
+                 ]
     })
     .compileComponents();
   }));
@@ -46,7 +60,6 @@ describe('ItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);
     component = fixture.componentInstance;
-    component.task = item;
     fixture.detectChanges();
   });
 

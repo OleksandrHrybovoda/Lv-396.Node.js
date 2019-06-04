@@ -47,7 +47,7 @@
         <app-modal [modalType]="'RE-ASSIGNE'" [task]="task"></app-modal>
       </div>
       <div class="view-comment" dropdown *ngIf="task.comments">
-        <span dropdownToggle>ViewComment ({{task.comments.length}})</span>
+        <span dropdownToggle>ViewComment ({{ task.comments.length }})</span>
         <ul class="user-bar__menu dropdown-menu" *dropdownMenu role="menu" aria-labelledby="button-disabled-item">
           <li class="user-bar__row user-bar__elem  dropdown-item" *ngFor="let comments of task.comments"
             role="menuitem">

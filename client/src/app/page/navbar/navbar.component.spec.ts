@@ -101,8 +101,7 @@ describe('NavbarComponent', () => {
       ],
       providers: [NavItemsService]
     })
-      .compileComponents()
-      .catch(err => throwError(new Error(err)));
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -114,23 +113,20 @@ describe('NavbarComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy()
-      .catch(err => throwError(new Error(err)));
+      .toBeTruthy();
   });
 
   it(`should set menuList`, () => {
     spy = spyOn(NavItemsService.prototype, 'getNavList').and
       .returnValue(Observable.of(mockMenuList));
     expect(component.menuList)
-      .toEqual(mockMenuList)
-      .catch(err => throwError(new Error(err)));
+      .toEqual(mockMenuList);
   });
 
   it('should change property active to false on window scroll', () => {
     window.dispatchEvent(new Event('scroll'));
     expect(component.active)
-      .toBe(false)
-      .catch(err => throwError(new Error(err)));
+      .toBe(false);
   });
 
   it(`should return item id`, () => {

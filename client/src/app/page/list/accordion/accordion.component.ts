@@ -13,9 +13,9 @@ export class AccordionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  trackElement(index: number, task: Task): string {
-    const uniqueCode = task.id + task.isOpen.toString();
+  // trackElement(index: number, task: Task): string {
+  //   const uniqueCode = task.id + task.isOpen.toString();
 
-    return uniqueCode;
-  }
+  //   return uniqueCode;
+  // }
 }

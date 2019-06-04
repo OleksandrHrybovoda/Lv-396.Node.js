@@ -34,7 +34,6 @@ export class NavbarProfileComponent implements OnInit, OnDestroy {
   itemMenuSettings: NavItemSet;
   avatar: string;
 
-
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
               private readonly route: ActivatedRoute,
@@ -55,6 +54,8 @@ export class NavbarProfileComponent implements OnInit, OnDestroy {
       });
     this.loadDates();
     this.todayDate = new Date();
+    this.avatar =  this.user.photoURL || 'assets/img/userimg.jpg';
+
     this.itemMenuSettings = {
       type: 'rightMenu',
       style: 'right-menu-elem dropdown-item'

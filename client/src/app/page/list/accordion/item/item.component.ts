@@ -4,6 +4,7 @@ import { TasksService } from '../../../common/tasks.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../common/services/user.service';
 import { User } from '../../../../common/models/user';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-item',
@@ -102,7 +103,8 @@ export class ItemComponent implements OnInit {
   }
 
   selectUser(uid: string): void {
-    this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route });
+    this.router.navigate(['/profile/my-profile/', uid], { relativeTo: this.route })
+      .catch(err => throwError(new Error(err)));
   }
 
   resolveClick(): void {

@@ -105,8 +105,7 @@ describe('NavbarProfileComponent', () => {
         NavItemsService
       ]
     })
-      .compileComponents()
-      .catch(err => throwError(new Error(err)));
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -121,16 +120,14 @@ describe('NavbarProfileComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy()
-      .catch(err => throwError(new Error(err)));
+      .toBeTruthy();
   });
 
   it(`should be inject service, shouldn't get navites list if note async`, () => {
     jasmine.createSpy('getNavList').and
       .returnValue(Observable.of(mockMenuList));
     expect(component.menuList)
-      .toEqual(mockMenuList)
-      .catch(err => throwError(new Error(err)));
+      .toEqual(mockMenuList);
     fixture.detectChanges();
   });
 

@@ -36,13 +36,13 @@
       <span>You can't assign to yourself!</span>
     </div>
   </div>
-  <div *ngIf="isFieldCorrectLength('name') === true" class="alert alert-danger visible-temporarily">
+  <div *ngIf="isFieldCorrectLength('name')" class="alert alert-danger visible-temporarily">
     The task name have to be 5 symbols at least.
   </div>
-  <div *ngIf="isFieldCorrectLength('excerpt') === true" class="alert alert-danger visible-temporarily">
+  <div *ngIf="isFieldCorrectLength('excerpt')" class="alert alert-danger visible-temporarily">
     The task summary have to be 9 symbols at least.
   </div>
-  <div *ngIf="isFieldCorrectLength('content') === true" class="alert alert-danger visible-temporarily">
+  <div *ngIf="isFieldCorrectLength('content')" class="alert alert-danger visible-temporarily">
     The task description have to be max 400 symbols.
   </div>
   <div class="modal-body" >

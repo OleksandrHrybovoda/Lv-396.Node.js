@@ -31,8 +31,7 @@ describe('SocialNetworksComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SocialNetworksComponent]
     })
-      .compileComponents()
-      .catch(err => throwError(new Error(err)));
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -43,22 +42,19 @@ describe('SocialNetworksComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy()
-      .catch(err => throwError(new Error(err)));
+      .toBeTruthy();
   });
 
   it(`should be inject service, shouldn't get links list if note async`, () => {
     jasmine.createSpy('getLinksList').and
       .returnValue(Observable.of(mockLinksList));
     expect(component.links)
-      .toEqual(mockLinksList)
-      .catch(err => throwError(new Error(err)));
+      .toEqual(mockLinksList);
     fixture.detectChanges();
   });
 
   it(`should return item id`, () => {
     expect(component.trackById(mockLinksList[1]))
-      .toEqual('1')
-      .catch(err => throwError(new Error(err)));
+      .toEqual('1');
   });
 });

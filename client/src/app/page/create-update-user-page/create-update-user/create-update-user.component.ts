@@ -79,6 +79,7 @@ export class CreateUpdateUserComponent implements OnInit, OnDestroy {
   }
 
   private readonly loadUser = (id: string) => {
+
     this.userInfoService.getUser(this.id)
       .takeUntil(this.destroy$)
       .subscribe((user) => {

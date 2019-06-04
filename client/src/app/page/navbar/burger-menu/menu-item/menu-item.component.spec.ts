@@ -11,8 +11,7 @@ describe('MenuItemComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MenuItemComponent]
     })
-      .compileComponents()
-      .catch(err => throwError(new Error(err)));
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,7 +22,6 @@ describe('MenuItemComponent', () => {
 
   it('should create', () => {
     expect(component)
-      .toBeTruthy()
-      .catch(err => throwError(new Error(err)));
+      .toBeTruthy();
   });
 });
