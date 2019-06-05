@@ -18,7 +18,7 @@ import { DatesItem } from '../../common/dates-item';
 })
 
 export class NavbarProfileComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
   @Input() public userType: string;
   @Input() public menuList: NavItem[];

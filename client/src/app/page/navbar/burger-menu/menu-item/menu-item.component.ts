@@ -28,8 +28,8 @@ export class MenuItemComponent implements OnInit {
   }
 
   setup(): void {
-    this.class = this.settings.style;
-    this.menuType = this.settings.type;
+      this.menuType = this.settings.type;
+      this.class = this.settings.style;
   }
 
 

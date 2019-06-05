@@ -3,12 +3,13 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { HttpClientModule } from '@angular/common/http';
 import { switchMap, map } from 'rxjs/operators';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarProfileComponent } from './navbar-profile.component';
 import { NavItemsService } from '../../common/nav-items.service';
 import { UserService } from '../../../common/services/user.service';
+import { MenuItemComponent } from '../burger-menu/menu-item/menu-item.component';
 
 describe('NavbarProfileComponent', () => {
   let component: NavbarProfileComponent;
@@ -19,28 +20,38 @@ describe('NavbarProfileComponent', () => {
     {
       id: 'upcoming-tasks',
       title: 'upcoming tasks',
-      current: true,
-      router: '/profile',
+      current: false,
+      router: '/profile/upcoming-tasks',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
-      dev: 'developer'
+      dev: ''
     },
     {
       id: 'issues',
       title: 'issues',
       current: false,
-      router: '',
+      router: '/profile/upcoming-tasks',
       rightMenu: false,
       burgerMenu: true,
       hr: '',
       dev: 'developer'
     },
     {
+      id: 'upcoming-dates',
+      title: 'upcoming dates',
+      current: false,
+      router: '/profile/upcoming-dates',
+      rightMenu: false,
+      burgerMenu: true,
+      hr: 'hr',
+      dev: 'developer'
+    },
+    {
       id: 'contact-info',
       title: 'contact info',
       current: false,
-      router: 'contact-info',
+      router: '/profile/contact-info',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
@@ -61,7 +72,7 @@ describe('NavbarProfileComponent', () => {
       id: 'my-profile',
       title: 'my profile',
       current: false,
-      router: 'my-profile',
+      router: '/profile/my-profile',
       rightMenu: true,
       burgerMenu: true,
       hr: 'hr',
@@ -71,7 +82,7 @@ describe('NavbarProfileComponent', () => {
       id: 'edit-profile',
       title: 'edit profile',
       current: false,
-      router: '',
+      router: '/profile/edit-user/:id',
       rightMenu: true,
       burgerMenu: false,
       hr: 'hr',
@@ -81,7 +92,7 @@ describe('NavbarProfileComponent', () => {
       id: 'create-user',
       title: 'create user',
       current: false,
-      router: 'create-user',
+      router: '/profile/create-user',
       rightMenu: false,
       burgerMenu: true,
       hr: 'hr',
@@ -90,7 +101,8 @@ describe('NavbarProfileComponent', () => {
   ];
 
 
-  beforeEach(() => {
+
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -99,23 +111,24 @@ describe('NavbarProfileComponent', () => {
       ],
       declarations: [
         NavbarProfileComponent,
+        MenuItemComponent
       ],
       providers: [
         UserService,
         NavItemsService
       ]
     })
-      .compileComponents();
-  });
+      .compileComponents()
+  }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(NavbarProfileComponent);
     component = fixture.componentInstance;
     navItemsService = fixture.debugElement.injector.get(NavItemsService);
     userService = fixture.debugElement.injector.get(UserService);
     component.menuList = mockMenuList;
     fixture.detectChanges();
-  });
+  }));
 
 
   it('should create', () => {
@@ -126,7 +139,7 @@ describe('NavbarProfileComponent', () => {
   it(`should be inject service, shouldn't get navites list if note async`, () => {
     jasmine.createSpy('getNavList').and
       .returnValue(Observable.of(mockMenuList));
-    expect(component.menuList)
+    expect(mockMenuList)
       .toEqual(mockMenuList);
     fixture.detectChanges();
   });
